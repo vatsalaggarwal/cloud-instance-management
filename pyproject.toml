@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "cloud-instance-management"
+version = "0.1.0"
+description = ""
+authors = ["Vatsal <vatsalaggarwal@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "cloud_instance_management"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+google-cloud-compute = "^1.10.1"
+typer = "^0.7.0"
+
+[tool.poetry.scripts]
+cim = "cloud_instance_management.cli:app"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
