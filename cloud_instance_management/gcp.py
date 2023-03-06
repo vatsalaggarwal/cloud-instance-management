@@ -4,7 +4,7 @@ from typing import Any, Iterable
 from google.api_core.extended_operation import ExtendedOperation
 from google.cloud import compute_v1
 
-from cloud_manager import CloudManager
+from cloud_instance_management.cloud_manager import CloudManager
 
 # Source of info: https://cloud.google.com/compute/docs/samples/compute-start-instance#compute_start_instance-python
 # To parse network info: https://cloud.google.com/compute/docs/instances/view-ip-address#api

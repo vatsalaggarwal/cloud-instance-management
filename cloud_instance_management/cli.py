@@ -1,9 +1,11 @@
 import typer
 from rich import print
 
-from cloud_manager import update_ssh_config
-from constants import INSTANCE_NAME, LOCAL_INSTANCE_NAME, PROJECT_ID
-from gcp import GCP
+from cloud_instance_management.cloud_manager import update_ssh_config
+from cloud_instance_management.constants import (INSTANCE_NAME,
+                                                 LOCAL_INSTANCE_NAME,
+                                                 PROJECT_ID)
+from cloud_instance_management.gcp import GCP
 
 gcp = GCP(PROJECT_ID)
 
@@ -25,10 +27,12 @@ def stop():
     print("Stopping instance...")
     gcp.stop_instance(INSTANCE_NAME)
     print("Instance stopped...")
-    
+
+
 @app.command()
 def list():
     print(gcp.list_instances())
+
 
 if __name__ == "__main__":
     app()
