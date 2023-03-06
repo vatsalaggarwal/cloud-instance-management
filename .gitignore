@@ -1,3 +1,6 @@
+**.DS_Store
+cloud_instance_management/constants.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
