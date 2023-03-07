@@ -34,5 +34,11 @@ def list():
     print(gcp.list_instances())
 
 
+@app.command()
+def code():
+    print("Starting VS Code remote...")
+    gcp.start_vs_code_remote(INSTANCE_NAME, LOCAL_INSTANCE_NAME)
+
+
 if __name__ == "__main__":
     app()

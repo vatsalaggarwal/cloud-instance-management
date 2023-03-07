@@ -55,3 +55,7 @@ class CloudManager:
     @abstractmethod
     def list_instances(self):
         pass
+
+    def start_vs_code_remote(self, local_instance_name):
+        # Ref: https://code.visualstudio.com/docs/remote/troubleshooting#_connect-to-a-remote-host-from-the-terminal
+        os.system(f"code -n --remote ssh-remote+{local_instance_name}")

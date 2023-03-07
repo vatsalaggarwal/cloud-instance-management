@@ -122,3 +122,15 @@ class GCP(CloudManager):
                     all_instances[instance.name] = instance_info
 
         return all_instances
+
+    def start_vs_code_remote(self, gcp_instance_name: str, local_instance_name: str):
+        instances = self.list_instances()
+        if gcp_instance_name not in instances:
+            raise ValueError(f"Instance {gcp_instance_name} does not exist")
+
+        instance = instances[gcp_instance_name]
+
+        if instance["status"] != "RUNNING":
+            self.start_instance(gcp_instance_name)
+
+        super().start_vs_code_remote(local_instance_name)
