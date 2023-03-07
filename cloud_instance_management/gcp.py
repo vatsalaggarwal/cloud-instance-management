@@ -3,8 +3,10 @@ from typing import Any, Iterable
 
 from google.api_core.extended_operation import ExtendedOperation
 from google.cloud import compute_v1
+from rich import print
 
-from cloud_instance_management.cloud_manager import CloudManager
+from cloud_instance_management.cloud_manager import (CloudManager,
+                                                     update_ssh_config)
 
 # Source of info: https://cloud.google.com/compute/docs/samples/compute-start-instance#compute_start_instance-python
 # To parse network info: https://cloud.google.com/compute/docs/instances/view-ip-address#api
@@ -124,6 +126,7 @@ class GCP(CloudManager):
         return all_instances
 
     def start_vs_code_remote(self, gcp_instance_name: str, local_instance_name: str):
+        print("Starting VS Code remote...")
         instances = self.list_instances()
         if gcp_instance_name not in instances:
             raise ValueError(f"Instance {gcp_instance_name} does not exist")
@@ -131,6 +134,10 @@ class GCP(CloudManager):
         instance = instances[gcp_instance_name]
 
         if instance["status"] != "RUNNING":
+            print("Instance was not running. Starting it now...")
             self.start_instance(gcp_instance_name)
+            print("Instance started. Launching VS Code...")
+            instance = self.list_instances()[gcp_instance_name]
+            update_ssh_config(local_instance_name, instance)
 
         super().start_vs_code_remote(local_instance_name)
